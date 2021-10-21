@@ -7,22 +7,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
+import java.time.LocalDate;
+import java.util.NoSuchElementException;
+
 @Service
 @Validated
-public class CreateUseCase implements SaveQuestion {
+public class UpdateQuestionUseCase implements UpdateQuestion {
     private final QuestionRepository questionRepository;
     private final MapperUtils mapperUtils;
 
-    public CreateUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
+
+    public UpdateQuestionUseCase(QuestionRepository questionRepository, MapperUtils mapperUtils) {
         this.questionRepository = questionRepository;
         this.mapperUtils = mapperUtils;
     }
 
-    @Override
-public Mono<String> apply(QuestionDTO newQuestion) {
-        return questionRepository
-                .save(mapperUtils.mapperToQuestion(null).apply(newQuestion))
-                .map(Question::getId);
+    public Mono<QuestionDTO> apply(QuestionDTO questionDTO) {
+
+
+        return questionRepository.save(mapperUtils.mapperToQuestion(questionDTO.getId()).apply(questionDTO))
+                .map(mapperUtils.mapEntityToQuestion());
     }
 
 }

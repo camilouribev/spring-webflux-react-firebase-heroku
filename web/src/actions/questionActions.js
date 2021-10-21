@@ -1,8 +1,11 @@
-const URL_BASE = " https://warm-ridge-20718.herokuapp.com";
+// const URL_BASE = "https://warm-ridge-20718.herokuapp.com";
+const URL_BASE = "http://localhost:8080";
 
 export const LOADING = "LOADING";
 export const LOADED_SUCCESS = "LOADED_SUCCESS";
 export const LOADED_FAILURE = "LOADED_FAILURE";
+export const REVIEW_SUCCESS = "REVIEW_SUCCESS";
+export const REVIEW_FAILURE = "REVIEW_FAILURE";
 
 export const loading = () => ({ type: LOADING });
 
@@ -103,6 +106,25 @@ export function postAnswer(answer) {
         body: JSON.stringify(answer),
       });
       dispatch(success({ redirect: `/question/${answer.questionId}` }));
+    } catch (error) {
+      dispatch(failure());
+    }
+  };
+}
+
+export function postReview(score, id, user) {
+  return async (dispatch) => {
+    dispatch(loading());
+    try {
+      await fetch(`${URL_BASE}/addreview/${id}/${score}`, {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      dispatch(success({ redirect: `/question/${id}` }));
     } catch (error) {
       dispatch(failure());
     }

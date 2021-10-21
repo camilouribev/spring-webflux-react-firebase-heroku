@@ -1,6 +1,6 @@
 package co.com.sofka.questions.collections;
 
-public class UserID {
+public class Review {
     private String userId;
     private String score;
     private String questionId;

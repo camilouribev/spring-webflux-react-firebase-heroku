@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { postReview } from "../actions/questionActions";
 
@@ -14,7 +14,6 @@ function QuestionReviewForm({ question, user, dispatch, loading, hasErrors }) {
   const renderQuestions = () => {
     if (loading) return <p>Loading ...</p>;
     if (hasErrors) return <p>Unable to display questions.</p>;
-    console.log(question.userReviews.includes(user));
     return question.userReviews.indexOf(user);
   };
 

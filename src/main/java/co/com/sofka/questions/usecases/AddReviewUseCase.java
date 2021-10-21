@@ -1,6 +1,6 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.collections.UserID;
+import co.com.sofka.questions.collections.Review;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,12 @@ public class AddReviewUseCase {
         this.updateQuestionUseCase = updateQuestionUseCase;
     }
 
-    public Mono<QuestionDTO> addReview(UserID userId) {
-        return questionRepository.findById(userId.getQuestionId()).flatMap(
+    public Mono<QuestionDTO> addReview(Review review) {
+        return questionRepository.findById(review.getQuestionId()).flatMap(
                 question -> {
                         question.setNumberOfReviews(question.getNumberOfReviews()+1);
-                        question.setSumOfReviewScores(question.getSumOfReviewScores()+Integer.parseInt(userId.getScore()));
-                        question.getUserReviews().add(userId.getUserId());
+                        question.setSumOfReviewScores(question.getSumOfReviewScores()+Integer.parseInt(review.getScore()));
+                        question.getUserReviews().add(review.getUserId());
                         question.setUserReviews(question.getUserReviews());
                         return  updateQuestionUseCase.apply(mapperUtils.mapEntityToQuestion().apply(question));
 

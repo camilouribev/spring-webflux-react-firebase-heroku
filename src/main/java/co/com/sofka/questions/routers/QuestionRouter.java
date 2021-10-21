@@ -1,15 +1,12 @@
 package co.com.sofka.questions.routers;
 
-import co.com.sofka.questions.collections.Question;
-import co.com.sofka.questions.collections.UserID;
+import co.com.sofka.questions.collections.Review;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.reposioties.QuestionRepository;
 import co.com.sofka.questions.usecases.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -95,6 +92,16 @@ public class QuestionRouter {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> deleteAnswer(DeleteAnswerIdUseCase deleteAnswerIdUseCase) {
+        return route(
+                DELETE("/deleteanswer/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.accepted()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(deleteAnswerIdUseCase.apply(request.pathVariable("id")), Void.class))
+        );
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> update(UpdateQuestionUseCase updateQuestionUseCase) {
         return route(PUT("/edit").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(QuestionDTO.class)
@@ -110,8 +117,8 @@ public class QuestionRouter {
     @Bean
     public RouterFunction<ServerResponse> addReview(AddReviewUseCase addReviewUseCase) {
         return route(PUT("/addreview").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(UserID.class)
-                        .flatMap(userId -> addReviewUseCase.addReview(userId)
+                request -> request.bodyToMono(Review.class)
+                        .flatMap(review -> addReviewUseCase.addReview(review)
                                 .flatMap(result -> ServerResponse.ok()
                                         .contentType(MediaType.APPLICATION_JSON)
                                         .bodyValue(result))
@@ -119,7 +126,7 @@ public class QuestionRouter {
         );
     }
 
-    
+
 
 
 }

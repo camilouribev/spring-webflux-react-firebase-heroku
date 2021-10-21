@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const PublicNavbar = () => (
   <nav>
-    <img src="/icon.png" alt="icon" />
+    <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: 0 }} />
     <section>
       <Link to="/">Home</Link>
       <Link to="/questions">Questions</Link>

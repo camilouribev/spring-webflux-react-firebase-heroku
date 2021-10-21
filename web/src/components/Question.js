@@ -19,6 +19,5 @@ export const Question = ({ question, excerpt, onDelete }) => (
         View Question
       </Link>
     )}
-    <QuestionReviewForm />
   </article>
 );

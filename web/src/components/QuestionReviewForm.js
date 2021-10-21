@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { postReview } from "../actions/questionActions";
 
 import { useForm } from "react-hook-form";
+import Rating from "./Rating";
 
 function QuestionReviewForm({ question, user, dispatch, loading, hasErrors }) {
   const { register, handleSubmit } = useForm();
@@ -12,16 +13,19 @@ function QuestionReviewForm({ question, user, dispatch, loading, hasErrors }) {
   };
 
   const renderQuestions = () => {
-    if (loading) return <p>Loading ...</p>;
-    if (hasErrors) return <p>Unable to display questions.</p>;
-    return question.userReviews.indexOf(user);
+    console.log(question.userReviews);
+    return question.userReviews.includes(user);
   };
+  if (loading) return <p>Loading ...</p>;
+  if (hasErrors) return <p>Unable to display questions.</p>;
 
   return (
     <section>
       <h1>Questions</h1>
-      {!renderQuestions() ? (
-        <div>Inhabilitado</div>
+      {renderQuestions() ? (
+        <div>
+          Average question rating: <Rating question={question} />
+        </div>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           <label for="review">Question rating</label>

@@ -18,15 +18,9 @@ import QuestionFormPage from "./pages/QuestionFormPage";
 import AnswerFormPage from "./pages/AnswerFormPage";
 import OwnerQuestionsPage from "./pages/OwnerQuestionsPage";
 import { useAuthState } from "react-firebase-hooks/auth";
-
-firebase.initializeApp({
-  apiKey: "AIzaSyDby867sj16ySaOzZYn0FhjnEiPrAtXXLE",
-  authDomain: "webflux-react-demo.firebaseapp.com",
-  projectId: "webflux-react-demo",
-  storageBucket: "webflux-react-demo.appspot.com",
-  messagingSenderId: "741287798619",
-  appId: "1:741287798619:web:9779324e1aa84d104ddc7e",
-});
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import Footer from "./components/Footer";
 
 const auth = firebase.auth();
 
@@ -59,6 +53,7 @@ const App = ({ dispatch }) => {
             <Route exact path="/new" component={QuestionFormPage} />
             <Redirect to="/" />
           </Switch>
+          <Footer />
         </>
       ) : (
         <>
@@ -78,8 +73,24 @@ const App = ({ dispatch }) => {
             <Route exact path="/questions" component={QuestionsPage} />
             <Route exact path="/question/:id" component={SingleQuestionPage} />
             <Route exact path="/answer/:id" component={AnswerFormPage} />
+            <Route
+              exact
+              path="/login"
+              component={() => {
+                return <LoginPage dispatch={dispatch}></LoginPage>;
+              }}
+            />
+
+            <Route
+              exact
+              path="/register"
+              component={() => {
+                return <RegisterPage dispatch={dispatch}></RegisterPage>;
+              }}
+            />
             <Redirect to="/" />
           </Switch>
+          <Footer />
         </>
       )}
     </Router>

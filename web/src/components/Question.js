@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import QuestionReviewForm from "./QuestionReviewForm";
 
 export const Question = ({ question, excerpt, onDelete }) => (
   <article className={excerpt ? "question-excerpt" : "question"}>

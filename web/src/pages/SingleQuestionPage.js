@@ -44,7 +44,7 @@ const SingleQuestionPage = ({
 
     return (
       <div>
-        <Question question={question} />{" "}
+        <Question question={question} />
         <QuestionReviewForm question={question} />
       </div>
     );

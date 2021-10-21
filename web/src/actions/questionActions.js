@@ -116,15 +116,16 @@ export function postReview(score, id, user) {
   return async (dispatch) => {
     dispatch(loading());
     try {
-      await fetch(`${URL_BASE}/addreview/${id}/${score}`, {
+      const response = await fetch(`${URL_BASE}/addreview`, {
         method: "PUT",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify({ userId: user, score: score, questionId: id }),
       });
-      dispatch(success({ redirect: `/question/${id}` }));
+      const data = await response.json();
+      dispatch(success({ redirect: `/question/${id}`, question: data }));
     } catch (error) {
       dispatch(failure());
     }

@@ -37,7 +37,7 @@ class DeleteUseCaseTest {
         var answerDTO = new AnswerDTO("XXX","122","xxx","test");
 
         Mockito.when(questionRepository.deleteById("122")).thenReturn(Mono.empty());
-        Mockito.when(answerRepository.deleteByQuestionId("XXX")).thenReturn(Mono.empty());
+        Mockito.when(answerRepository.deleteByQuestionId("122")).thenReturn(Mono.empty());
 
         var result = deleteQuestionUseCase.apply("122").block();
 

@@ -21,6 +21,7 @@ public class QuestionDTO {
     private Integer numberOfReviews = 0;
     private Integer sumOfReviewScores = 0;
     private List<String> userReviews = new ArrayList<>();
+    private String userEmail;
 
 
     public QuestionDTO() {
@@ -36,7 +37,7 @@ public class QuestionDTO {
        
     }
 
-    public QuestionDTO(String id, String userId, String question, String type, String category, Integer numberOfReviews, Integer sumOfReviewScores, List<String> userReviews) {
+    public QuestionDTO(String id, String userId, String question, String type, String category, Integer numberOfReviews, Integer sumOfReviewScores, List<String> userReviews, String userEmail) {
         this.id = id;
         this.userId = userId;
         this.question = question;
@@ -45,6 +46,7 @@ public class QuestionDTO {
         this.numberOfReviews = numberOfReviews;
         this.sumOfReviewScores = sumOfReviewScores;
         this.userReviews = userReviews;
+        this.userEmail = userEmail;
     }
 
     public List<AnswerDTO> getAnswers() {
@@ -120,17 +122,25 @@ public class QuestionDTO {
         this.userReviews = userReviews;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QuestionDTO that = (QuestionDTO) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getQuestion(), that.getQuestion()) && Objects.equals(getType(), that.getType()) && Objects.equals(getCategory(), that.getCategory()) && Objects.equals(getAnswers(), that.getAnswers()) && Objects.equals(getNumberOfReviews(), that.getNumberOfReviews()) && Objects.equals(getSumOfReviewScores(), that.getSumOfReviewScores()) && Objects.equals(getUserReviews(), that.getUserReviews());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getUserId(), that.getUserId()) && Objects.equals(getQuestion(), that.getQuestion()) && Objects.equals(getType(), that.getType()) && Objects.equals(getCategory(), that.getCategory()) && Objects.equals(getAnswers(), that.getAnswers()) && Objects.equals(getNumberOfReviews(), that.getNumberOfReviews()) && Objects.equals(getSumOfReviewScores(), that.getSumOfReviewScores()) && Objects.equals(getUserReviews(), that.getUserReviews()) && Objects.equals(getUserEmail(), that.getUserEmail());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getUserId(), getQuestion(), getType(), getCategory(), getAnswers(), getNumberOfReviews(), getSumOfReviewScores(), getUserReviews());
+        return Objects.hash(getId(), getUserId(), getQuestion(), getType(), getCategory(), getAnswers(), getNumberOfReviews(), getSumOfReviewScores(), getUserReviews(), getUserEmail());
     }
 
     @Override
@@ -145,6 +155,7 @@ public class QuestionDTO {
                 ", numberOfReviews=" + numberOfReviews +
                 ", sumOfReviewScores=" + sumOfReviewScores +
                 ", userReviews=" + userReviews +
+                ", userEmail='" + userEmail + '\'' +
                 '}';
     }
 }

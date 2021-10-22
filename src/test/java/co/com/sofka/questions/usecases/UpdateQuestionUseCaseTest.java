@@ -18,7 +18,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class UpdateUseCaseTest {
+class UpdateQuestionUseCaseTest {
 
     @SpyBean
     private UpdateQuestionUseCase updateUseCase;

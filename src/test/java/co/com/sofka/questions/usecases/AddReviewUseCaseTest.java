@@ -1,80 +1,66 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.QuestionsApplication;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.model.Review;
 import co.com.sofka.questions.reposioties.QuestionRepository;
-import co.com.sofka.questions.routers.QuestionRouter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 @SpringBootTest
 class AddReviewUseCaseTest {
-    /*@MockBean
-    private QuestionRepository questionRepository;
+    @MockBean
+    QuestionRepository questionRepository;
 
-    @Autowired
-    private AddReviewUseCase addReviewUseCase;
+    @Mock
+    UpdateQuestionUseCase updateQuestionUseCase;
 
-    @Autowired
-    private WebTestClient webTestClient;
-
+    @SpyBean
+    AddReviewUseCase addReviewUseCase;
 
     @Test
-    @DisplayName("Test AddReview success")
-    public void testAddReview() {
-        var testQuestion = new Question();
-        testQuestion.setUserId("1");
-        testQuestion.setId("XXX");
-        testQuestion.setQuestion("Is this testing?");
-        testQuestion.setType("Computers");
-        testQuestion.setCategory("Various");
-        testQuestion.setNumberOfReviews(3);
-        testQuestion.setUserReviews( new ArrayList<>());
-        testQuestion.setUserEmail("test@test.com");
-        testQuestion.setSumOfReviewScores(9);
+    @DisplayName("Add satisfaction review")
+    void setAddReviewTest(){
+        List<String> listParameter = new ArrayList<>();
+        var questionDTO = new QuestionDTO("id222333", "3erre", "Is this running?",
+                "OPEN (LONG OPEN BOX)", "SOFTWARE DEVELOPMENT", 1, 1, listParameter, "test@test.com");
 
-        var testQuestionDTO = new QuestionDTO();
-        testQuestionDTO.setUserId("1");
-        testQuestionDTO.setId("XXX");
-        testQuestionDTO.setQuestion("Is this testing?");
-        testQuestionDTO.setType("Computers");
-        testQuestionDTO.setCategory("Various");
-        testQuestionDTO.setNumberOfReviews(3);
-        testQuestionDTO.setUserEmail("test@test.com");
-        testQuestionDTO.setSumOfReviewScores(9);
+        var question = new Question();
+        question.setId("id222333");
+        question.setUserId("3erre");
+        question.setQuestion("Is this running?");
+        question.setType("OPEN (LONG OPEN BOX)");
+        question.setCategory("SOFTWARE DEVELOPMENT");
+        question.setNumberOfReviews(1);
+        question.setSumOfReviewScores(1);
+        question.setUserReviews(listParameter);
+        question.setUserEmail("test@test.com");
 
+        Mockito.when(questionRepository.findById(Mockito.any(String.class))).thenReturn(Mono.just(question));
+        Mockito.when(updateQuestionUseCase.apply(questionDTO)).thenReturn(Mono.just(questionDTO));
+        Mockito.when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));
 
-        var testReview = new Review();
-        testReview.setUserId("1");
-        testReview.setScore("2");
-        testReview.setQuestionId("XXX");
+        var review = new Review();
+        review.setUserId("3erre");
+        review.setScore("3");
+        review.setQuestionId("id222333");
 
-
-        Mockito.when(questionRepository.save(Mockito.any())).thenReturn(Mono.just(testQuestion));
-        var result = addReviewUseCase.addReview(testReview).block();
-
-        Assertions.assertEquals(4, result.getNumberOfReviews());
+        var resultQuestionDTO = addReviewUseCase.addReview(review);
+        assert resultQuestionDTO != null;
+        Assertions.assertEquals(resultQuestionDTO.block().getId(), question.getId());
+        Assertions.assertEquals(resultQuestionDTO.block().getCategory(), question.getCategory());
+        Assertions.assertEquals(4, resultQuestionDTO.block().getNumberOfReviews());
 
 
-    }*/
-
+    }
 }

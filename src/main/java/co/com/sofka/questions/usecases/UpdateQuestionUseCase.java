@@ -1,6 +1,5 @@
 package co.com.sofka.questions.usecases;
 
-import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -21,9 +20,8 @@ public class UpdateQuestionUseCase implements UpdateQuestion {
         this.mapperUtils = mapperUtils;
     }
 
+    @Override
     public Mono<QuestionDTO> apply(QuestionDTO questionDTO) {
-
-
         return questionRepository.save(mapperUtils.mapperToQuestion(questionDTO.getId()).apply(questionDTO))
                 .map(mapperUtils.mapEntityToQuestion());
     }

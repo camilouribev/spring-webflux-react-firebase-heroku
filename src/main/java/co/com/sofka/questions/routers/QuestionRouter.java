@@ -1,6 +1,6 @@
 package co.com.sofka.questions.routers;
 
-import co.com.sofka.questions.collections.Review;
+import co.com.sofka.questions.model.Review;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecases.*;
@@ -14,7 +14,6 @@ import reactor.core.publisher.Mono;
 
 import java.util.function.Function;
 
-import static org.springframework.web.reactive.function.BodyExtractors.toMono;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
@@ -112,7 +111,6 @@ public class QuestionRouter {
                         )
         );
     }
-
 
     @Bean
     public RouterFunction<ServerResponse> addReview(AddReviewUseCase addReviewUseCase) {

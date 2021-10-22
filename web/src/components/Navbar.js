@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 export const PublicNavbar = () => (
   <nav>
-    <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: 0 }} />
+    <Link className="logo" to="/">
+      <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: 0 }} />
+    </Link>
     <section>
       <Link to="/">Home</Link>
       <Link to="/questions">Questions</Link>
@@ -14,7 +16,9 @@ export const PublicNavbar = () => (
 
 export const PrivateNavbar = () => (
   <nav>
-    <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: 0 }} />
+    <Link className="logo" to="/">
+      <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: -10 }} />
+    </Link>
     <section>
       <Link to="/">Home</Link>
       <Link to="/questions">Questions</Link>

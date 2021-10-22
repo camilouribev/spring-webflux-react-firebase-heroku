@@ -13,16 +13,15 @@ function QuestionReviewForm({ question, user, dispatch, loading, hasErrors }) {
   };
 
   const renderQuestions = () => {
-    console.log(question.userReviews);
     return question.userReviews.includes(user);
   };
   if (loading) return <p>Loading ...</p>;
   if (hasErrors) return <p>Unable to display questions.</p>;
+  console.log(user);
 
   return (
     <section>
-      <h1>Questions</h1>
-      {renderQuestions() && !user ? (
+      {renderQuestions() || !user ? (
         <div>
           Average question rating: <Rating question={question} />
         </div>

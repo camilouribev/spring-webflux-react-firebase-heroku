@@ -2,12 +2,11 @@ import React from "react";
 
 export const Answer = ({ answer, userId, onDelete }) => (
   <aside className="answer">
-    <p>{answer.answer}</p>
+    <h2>
+      <div dangerouslySetInnerHTML={{ __html: answer.answer }} />
+    </h2>
     {answer.userId === userId && (
-      <button
-        className="boton-delete-answe"
-        onClick={() => onDelete(answer.id)}
-      >
+      <button className="button" onClick={() => onDelete(answer.id)}>
         DELETE
       </button>
     )}

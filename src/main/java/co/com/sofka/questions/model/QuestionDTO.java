@@ -23,10 +23,8 @@ public class QuestionDTO {
     private List<String> userReviews = new ArrayList<>();
 
 
-
-
     public QuestionDTO() {
-        
+
 
     }
 

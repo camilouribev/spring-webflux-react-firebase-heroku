@@ -31,7 +31,7 @@ class AddAnswerUseCaseTest {
     AnswerRepository answerRepository;
 
     @Test
-    @DisplayName("Agregar respuesta.")
+    @DisplayName("Add answer")
     void answerTest(){
 
         var questionDTO = new QuestionDTO("122","xxx","Is this running?","Tests",

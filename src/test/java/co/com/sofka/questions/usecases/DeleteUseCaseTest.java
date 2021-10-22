@@ -28,7 +28,7 @@ class DeleteUseCaseTest {
     DeleteUseCase deleteQuestionUseCase;
 
     @Test
-    @DisplayName("Eliminar por id")
+    @DisplayName("Deleted by Id")
     void delete(){
 
         var questionDTO = new QuestionDTO("122","xxx","Is this running?","Tests",

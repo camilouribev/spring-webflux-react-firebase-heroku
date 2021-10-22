@@ -33,7 +33,9 @@ const App = ({ dispatch }) => {
     <Router>
       {user ? (
         <>
-          <PrivateNavbar />
+          <PrivateNavbar>
+            <SignOut dispatch={dispatch} />{" "}
+          </PrivateNavbar>
           <Switch>
             <Route
               exact
@@ -77,7 +79,11 @@ const App = ({ dispatch }) => {
               exact
               path="/login"
               component={() => {
-                return <LoginPage dispatch={dispatch}></LoginPage>;
+                return (
+                  <LoginPage dispatch={dispatch}>
+                    <SignIn dispatch={dispatch} />
+                  </LoginPage>
+                );
               }}
             />
 

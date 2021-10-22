@@ -13,7 +13,12 @@ export const Question = ({
 
   return (
     <article className={excerpt ? "question-excerpt" : "question"}>
-      <h2>{question.question}</h2>
+      <h3>
+        <strong>
+          {" "}
+          <div dangerouslySetInnerHTML={{ __html: question.question }} />
+        </strong>
+      </h3>
       {setCategorySearch ? (
         <p className="categorySearch" onClick={handleCategorySearch}>
           {question.category} - <small>{question.type}</small>

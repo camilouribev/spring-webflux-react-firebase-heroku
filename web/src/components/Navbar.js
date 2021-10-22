@@ -14,7 +14,7 @@ export const PublicNavbar = () => (
   </nav>
 );
 
-export const PrivateNavbar = () => (
+export const PrivateNavbar = ({ children }) => (
   <nav>
     <Link className="logo" to="/">
       <img src="/icon.png" alt="icon" style={{ maxWidth: 50, padding: -10 }} />
@@ -24,6 +24,7 @@ export const PrivateNavbar = () => (
       <Link to="/questions">Questions</Link>
       <Link to="/new">New</Link>
       <Link to="/list">List</Link>
+      <Link>{children}</Link>
     </section>
   </nav>
 );

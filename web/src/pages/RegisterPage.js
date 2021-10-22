@@ -32,38 +32,39 @@ function RegisterPage({ dispatch }) {
   }
 
   return (
-    <div>
-      <form onSubmit={registerUser}>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">
-            Email address
-          </label>
+    <div className="form_container">
+      <form className="login-register__form" onSubmit={registerUser}>
+        <h1>Register</h1>
+        <div className="mb-3">
+          <label className="form-label">Email address</label>
           <input
             name="email"
             type="text"
-            class="form-control"
+            className="form-control"
             id="email"
             placeholder="Email"
             onChange={handleInputChange}
             value={userData.email}
+            minLength={6}
+            required
           />
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">
-            Password
-          </label>
+        <div className="mb-3">
+          <label className="form-label">Password</label>
           <input
             name="password"
-            type="text"
-            class="form-control"
+            type="password"
+            className="form-control"
             id="password"
             placeholder="password"
             onChange={handleInputChange}
             value={userData.password}
+            minLength={6}
+            required
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn-btn-primary">
           Submit
         </button>
       </form>

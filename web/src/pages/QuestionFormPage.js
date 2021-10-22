@@ -22,7 +22,7 @@ const FormPage = ({ dispatch, loading, redirect, userId, userEmail }) => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const data = { ...formState, userId, userId, userEmail, question: content };
+    const data = { ...formState, userId, userEmail, question: content };
     console.log(data);
     validateInput(data) && dispatch(postQuestion(data));
   };
